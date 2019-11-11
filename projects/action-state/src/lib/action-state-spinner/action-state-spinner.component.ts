@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { ActionStatus, serverStatusTypes } from '../ngrx';
 import { delayOn } from '../rxjs';
 
-
 @Component({
   selector: 'lib-action-state-spinner',
   templateUrl: './action-state-spinner.component.html',

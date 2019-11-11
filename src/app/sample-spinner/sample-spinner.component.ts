@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { timer } from 'rxjs';
+import { timer,interval } from 'rxjs';
 import { take, map, tap, scan } from 'rxjs/operators';
 import { serverStatusTypes } from 'projects/action-state/src/lib/ngrx';
 
@@ -10,7 +10,7 @@ import { serverStatusTypes } from 'projects/action-state/src/lib/ngrx';
 })
 export class SampleSpinnerComponent implements OnInit {
 
-  status$ = timer(0, 0).pipe(
+  status$ = timer(2000, 3000).pipe(
     take(3),
     scan( (acc, current) => {
       if ( current === 0 ) {

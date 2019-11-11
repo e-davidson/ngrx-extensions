@@ -1,28 +1,23 @@
-import { Observable, interval } from 'rxjs';
-import { scan, delayWhen, map } from 'rxjs/operators';
+import { Observable, scheduled, asapScheduler, merge } from 'rxjs';
+import { map, concatMap, delay, filter } from 'rxjs/operators';
 
-enum delayStatus {
-  noDelay,
-  delayNext,
-  delay
-}
 
-export function delayOn<T>( predicate: (t: T) => boolean, delay: number ) {
+export function delayOn<T>( predicate: (t: T) => boolean, delayTime: number ) {
   return (src: Observable<T>) => {
     return src.pipe(
-      scan( (acc, cur) => {
-        if ( predicate(cur) ) {
-          return { result: cur, delay: delayStatus.delayNext };
+      concatMap( r => {
+        if ( predicate(r) ) {
+          return merge(
+            scheduled([{r}], asapScheduler),
+            scheduled( [null] , asapScheduler).pipe(delay(delayTime))
+          ).pipe(
+            filter( d =>  d  ),
+            map( d => d.r )
+          );
         } else {
-          if ( acc.delay === delayStatus.delayNext ) {
-            return { result: cur, delay: delayStatus.delay };
-          } else {
-            return { result: cur, delay: delayStatus.noDelay };
-          }
+          return scheduled([r], asapScheduler);
         }
-      }, { delay: delayStatus.noDelay, result: null }),
-      delayWhen( ( d ) => interval( d.delay === delayStatus.delay ? delay : 0 ) ),
-      map( d => d.result )
+      })
     );
   };
 }
