@@ -14,9 +14,9 @@ export interface StatusState {
 
 export class ActionStatus {
   id: string;
-  displayName: string;
+  displayName?: string;
   status: serverStatusTypes;
-  responsePayload: any;
+  responsePayload?: any;
 }
 
 export enum serverStatusTypes {
