@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActionStateSpinnerComponent } from '../action-state-spinner/action-state-spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -10,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ActionStateSpinnerComponent,
   ],
   imports: [
-    BrowserAnimationsModule,
     CommonModule,
     MatProgressSpinnerModule,
   ],
