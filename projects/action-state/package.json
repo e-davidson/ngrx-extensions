@@ -1,8 +1,8 @@
 {
   "name": "ed-action-state",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "peerDependencies": {
-    "@angular/common": "^10.1.0",
-    "@angular/core": "^10.1.10"
+    "@angular/common": "^11.0.2",
+    "@angular/core": "^11.0.2"
   }
 }
